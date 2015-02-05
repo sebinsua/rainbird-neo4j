@@ -9,7 +9,13 @@ var regexp = /.*\/db\/data\/transaction\/(\d+)\/commit.*/;
 // lines of `http://localhost:7474`.
 
 function Neo4j(uri) {
-    this.neo4j = uri + '/db/data/transaction/';
+    var path = 'db/data/transaction/';
+
+    if(uri.substr(-1) === "/" ) {
+        this.neo4j = uri + path;
+    } else {
+        this.neo4j = uri + '/' + path;
+    }
 }
 
 // Results from the Neo4j REST API aren't in the best format and the
