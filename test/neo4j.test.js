@@ -4,6 +4,22 @@ var rewire = require('rewire');
 var Neo4j = rewire('../neo4j.js');
 
 describe('Neo4j wrapper', function() {
+    describe('when initialising', function() {
+        it('should allow a trailing /', function(done) {
+            var neo4j = new Neo4j('http://localhost:7474/');
+            var uri = neo4j.neo4j;
+            expect(uri).to.equal('http://localhost:7474/db/data/transaction/');
+            done();
+        });
+
+        it('should allow no trailing /', function(done) {
+            var neo4j = new Neo4j('http://localhost:7474');
+            var uri = neo4j.neo4j;
+            expect(uri).to.equal('http://localhost:7474/db/data/transaction/');
+            done();
+        });
+    });
+
     describe('when building a statement', function() {
 
         it('should work with just a template defined', function(done) {
@@ -263,7 +279,7 @@ describe('Neo4j wrapper', function() {
         });
     });
 
-    describe('When parsing results', function() {
+    describe('when parsing results', function() {
         it('should handle no body', function(done) {
             var parse = Neo4j.__get__('parseResults');
             parse(null, {}, 'info', function(err, results, info) {
