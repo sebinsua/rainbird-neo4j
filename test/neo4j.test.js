@@ -262,4 +262,16 @@ describe('Neo4j wrapper', function() {
             });
         });
     });
+
+    describe('When parsing results', function() {
+        it('should handle no body', function(done) {
+            var parse = Neo4j.__get__('parseResults');
+            parse(null, {}, 'info', function(err, results, info) {
+                expect(err).to.be.ok();
+                expect(results).to.be.empty();
+                expect(info).to.equal('info');
+                done();
+            });
+        });
+    });
 });
