@@ -53,6 +53,10 @@ function parseResults(err, results, info, callback) {
         return callback(err, [], info);
     }
 
+    if (!results.body) {
+        return callback(new Error('No body in results'), [], info);
+    }
+
     if (results.body.transaction) {
         info.timeout = results.body.transaction.expires;
     }

@@ -367,6 +367,9 @@ The Docker instance can now be stopped and deleted if it's no longer needed.
 
 # Release Notes
 
+## v0.2.2
+  *  [Fix] Handle the case when a response is parsed without a body.
+
 ## v0.2.1
   * [Misc] Add warning about substitutions and injection attacks.
 
