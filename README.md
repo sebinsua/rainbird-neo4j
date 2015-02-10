@@ -2,9 +2,14 @@
 
 ![Build Status](https://codeship.com/projects/415e09a0-71a3-0132-22e9-028f765b4235/status?branch=master)
 
+![Packade Dependencies](https://david-dm.org/RainBirdAi/rainbird-neo4j.svg)
+
 Thin wrapper around the [Neo4j Transactional Cypher HTTP][REST] REST endpoint
 that adds the ability to perform client side substitutions in queries. It also
 returns results in a slightly saner fashion than the raw endpoint.
+
+`rainbird-neo4j` makes use of Neo4j `2.x` features and will not provide legacy
+support for Neo4j `1.x`.
 
 ## Installation
 
@@ -366,6 +371,10 @@ npm run-script functional-test
 The Docker instance can now be stopped and deleted if it's no longer needed.
 
 # Release Notes
+
+## v0.2.3
+  * [Misc] Update package dependencies
+  * [Misc] Minor cleanup on the README
 
 ## v0.2.2
   *  [Fix] Handle the case when a response is parsed without a body.
