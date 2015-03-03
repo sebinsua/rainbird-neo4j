@@ -381,9 +381,16 @@ The Docker instance can now be stopped and deleted if it's no longer needed.
 
 # Release Notes
 
+## v0.3.0
+  * [Misc] Improve error messages for debugging without the `info` object.
+  * [Misc] Errors do not occur at the same index as statements in the `info`
+           object so removed this assertion from the README.
+  * [Misc] Improve documentation for `compose`
+  * [Misc] Add note about Neo4j 2.2 authentication
+
 ## v0.2.3
-  * [Misc] Update package dependencies
-  * [Misc] Minor cleanup on the README
+  * [Misc] Update package dependencies.
+  * [Misc] Minor cleanup on the README.
 
 ## v0.2.2
   *  [Fix] Handle the case when a response is parsed without a body.
