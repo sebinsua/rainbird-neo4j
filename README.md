@@ -216,9 +216,8 @@ and will vary depending on the exact context.
 The `statements` parameter will always be set and will contain the
 [statements](statements) sent to Neo4j.
 
-The `errors` parameter will contain an array of any errors returned by Neo4j.
-Any errors will have the same index as the statement that caused it. If no
-errors occurred then this list will be empty.
+The `errors` parameter will contain an array of any errors returned by Neo4j. If
+no errors occurred then this list will be empty.
 
 The `timeout` parameter is only set if `begin`, or `query` within the context of
 a transaction has been called. It contains the datetime stamp when the
