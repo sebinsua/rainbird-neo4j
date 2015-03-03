@@ -2,7 +2,7 @@
 
 ![Build Status](https://codeship.com/projects/415e09a0-71a3-0132-22e9-028f765b4235/status?branch=master)
 
-![Packade Dependencies](https://david-dm.org/RainBirdAi/rainbird-neo4j.svg)
+![Package Dependencies](https://david-dm.org/RainBirdAi/rainbird-neo4j.svg)
 
 Thin wrapper around the [Neo4j Transactional Cypher HTTP][REST] REST endpoint
 that adds the ability to perform client side substitutions in queries. It also
@@ -10,6 +10,10 @@ returns results in a slightly saner fashion than the raw endpoint.
 
 `rainbird-neo4j` makes use of Neo4j `2.x` features and will not provide legacy
 support for Neo4j `1.x`.
+
+**Note:** This driver doesn't support the Neo4j 2.2 authentication feature. To
+use the driver with Neo4j 2.2 you will need to disable authentication. A new
+version of the driver is being developed that will support authentication.
 
 ## Installation
 
@@ -212,9 +216,8 @@ and will vary depending on the exact context.
 The `statements` parameter will always be set and will contain the
 [statements](statements) sent to Neo4j.
 
-The `errors` parameter will contain an array of any errors returned by Neo4j.
-Any errors will have the same index as the statement that caused it. If no
-errors occurred then this list will be empty.
+The `errors` parameter will contain an array of any errors returned by Neo4j. If
+no errors occurred then this list will be empty.
 
 The `timeout` parameter is only set if `begin`, or `query` within the context of
 a transaction has been called. It contains the datetime stamp when the
@@ -303,17 +306,23 @@ resetTimeout(transactionID, callback)
 
 ### <a name="compose"></a>`compose`
 
-The `compose` function is a synchronous helper function that will construct a
-valid _statement object_ for inclusion in an array of [statements](#statements).
-It also allows for the use of [substitutions](#substitutions)
+The `compose` function is a helper function that will construct a valid
+_statement object_ for inclusion in an array of [statements](#statements).
+It also allows for the use of [substitutions](#substitutions).
+
+```javascript
+compose(queryString, callback)
+compose(queryString, parameters, callback)
+compose(queryString, substitutions, parameters, callback)
+```
 
 ### `escape`
 
 Identifiers in Neo4j follow the following basic rules:
 
    * case sensitive
-   * can contain underscores and alphanumeric characters ([a-zA-Z0-9_])
-   * must always start with a letter. ([a-zA-Z]+[a-zA-Z0-9_]*)
+   * can contain underscores and alphanumeric characters (`[a-zA-Z0-9_]`)
+   * must always start with a letter. (`[a-zA-Z]+[a-zA-Z0-9_]*`)
 
 More complex identifiers can be quoted using backtick (`) characters.
 Backticks themselves can be escaped using a backtick. Identifiers can be easily
@@ -372,9 +381,16 @@ The Docker instance can now be stopped and deleted if it's no longer needed.
 
 # Release Notes
 
+## v0.3.0
+  * [Misc] Improve error messages for debugging without the `info` object.
+  * [Misc] Errors do not occur at the same index as statements in the `info`
+           object so removed this assertion from the README.
+  * [Misc] Improve documentation for `compose`
+  * [Misc] Add note about Neo4j 2.2 authentication
+
 ## v0.2.3
-  * [Misc] Update package dependencies
-  * [Misc] Minor cleanup on the README
+  * [Misc] Update package dependencies.
+  * [Misc] Minor cleanup on the README.
 
 ## v0.2.2
   *  [Fix] Handle the case when a response is parsed without a body.

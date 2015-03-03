@@ -106,6 +106,26 @@ describe('Neo4j wrapper, when querying the database', function() {
         });
     });
 
+    it('should stop on the first error', function(done) {
+        var queries = [
+            { 'statement': 'BAR(:Foo)', 'parameters': {} },
+            { 'statement': 'MATCH (n) return n', 'parameters': {} },
+            { 'statement': 'CRATE(:Bar)', 'parameters': {} }
+
+        ];
+
+        db.query(queries, function(err, results, info) {
+            expect(err).to.be.ok();
+            expect(results).to.be.an('array');
+            expect(results).to.have.length(0);
+
+            expect(info).to.have.property('errors');
+            expect(info.errors).to.have.length(1);
+
+            done();
+        });
+    });
+
     it('should pass errors through', function(done) {
         var error = new Neo4j('does not exist');
         error.query('barf and die', {}, function(err, results, info) {
