@@ -115,7 +115,6 @@ describe('Neo4j wrapper, when querying the database', function() {
         ];
 
         db.query(queries, function(err, results, info) {
-            console.log(JSON.stringify(info, null, 4));
             expect(err).to.be.ok();
             expect(results).to.be.an('array');
             expect(results).to.have.length(0);
